@@ -1,6 +1,5 @@
 venv/
 data/images/
-data/annotations/
 outputs/
 *.pyc
 __pycache__/
