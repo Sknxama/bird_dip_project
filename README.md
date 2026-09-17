@@ -66,19 +66,27 @@ cd bird_dip_project
 
 ### 2. Create virtual environment
 
+```
 python -m venv venv
+```
 
-# Windows
+#### Windows
 
+```
 venv\Scripts\activate
+```
 
-# Mac/Linux
+#### Mac/Linux
 
+```
 source venv/bin/activate
+```
 
 ### 3. Install dependencies
 
+```
 pip install -r requirements.txt
+```
 
 ### 4. Download datasets
 
