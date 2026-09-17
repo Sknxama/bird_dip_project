@@ -25,33 +25,35 @@ The pipeline extracts 7 classical visual features (shape, color, texture, symmet
 
 ## Project Structure
 
+```
 bird_dip_project/
-├── app.py # Streamlit web interface
-├── config.py # Global configuration and paths
-├── pipeline.py # Batch processing script
-├── requirements.txt # Python dependencies
+├── app.py                    # Streamlit web interface
+├── config.py                 # Global configuration and paths
+├── pipeline.py               # Batch processing script
+├── requirements.txt          # Python dependencies
 ├── src/
-│ ├── preprocessing.py # Image preprocessing (OpenCV)
-│ ├── segmentation.py # Otsu + morphology segmentation
-│ ├── features.py # Feature extraction (7 metrics)
-│ ├── data_loader.py # CUB-200-2011 annotation loader
-│ ├── pca_analysis.py # PCA dimensionality reduction
-│ ├── classifier.py # Random Forest training/prediction
-│ ├── visualization.py # Plotting utilities
-│ ├── avonet_cleaner.py # AVONET data cleaning
-│ └── eco_mapper.py # CUB ↔ AVONET mapping
+│   ├── preprocessing.py      # Image preprocessing (OpenCV)
+│   ├── segmentation.py       # Otsu + morphology segmentation
+│   ├── features.py           # Feature extraction (7 metrics)
+│   ├── data_loader.py        # CUB-200-2011 annotation loader
+│   ├── pca_analysis.py       # PCA dimensionality reduction
+│   ├── classifier.py         # Random Forest training/prediction
+│   ├── visualization.py      # Plotting utilities
+│   ├── avonet_cleaner.py     # AVONET data cleaning
+│   └── eco_mapper.py         # CUB ↔ AVONET mapping
 ├── data/
-│ ├── images/ # CUB-200-2011 images (not in repo)
-│ ├── annotations/ # CUB-200-2011 labels
-│ └── avonet.csv # AVONET ecological dataset
+│   ├── images/               # CUB-200-2011 images (not in repo)
+│   ├── annotations/          # CUB-200-2011 labels
+│   └── avonet.csv            # AVONET ecological dataset
 ├── outputs/
-│ ├── features.csv # Extracted features (11,788 rows)
-│ ├── pca_results.csv # PCA projections
-│ ├── eco_lookup.csv # Ecological traits lookup table
-│ └── models/ # Trained models (.pkl)
+│   ├── features.csv          # Extracted features (11,788 rows)
+│   ├── pca_results.csv       # PCA projections
+│   ├── eco_lookup.csv        # Ecological traits lookup table
+│   └── models/               # Trained models (.pkl)
 ├── assets/
-│ └── logo.png # Project logo
-└── tests/ # Test scripts
+│   └── logo.png              # Project logo
+└── tests/                    # Test scripts
+```
 
 ## Installation
 
@@ -60,31 +62,46 @@ bird_dip_project/
 ```bash
 git clone https://github.com/YOUR_USERNAME/bird_dip_project.git
 cd bird_dip_project
+```
 
 ### 2. Create virtual environment
+
 python -m venv venv
 
 # Windows
+
 venv\Scripts\activate
 
 # Mac/Linux
+
 source venv/bin/activate
 
 ### 3. Install dependencies
+
 pip install -r requirements.txt
 
 ### 4. Download datasets
+
 CUB-200-2011: Download from Caltech and extract to data/images/ and data/annotations/.
 AVONET: Download from Figshare and save as data/avonet.csv.
-Usage
-Batch Processing (generate features.csv)
+
+## Usage
+
+### Batch Processing (generate features.csv)
+
+```bash
+python pipeline.py
 ```
 
-python pipeline.py
+### Launch Web Interface
 
-Launch Web Interface
+```bash
 streamlit run app.py
+```
+
 Then open your browser at http://localhost:8501
+
+## Key Parameters
 
 | Parameter              | Value  | Description                     |
 | ---------------------- | ------ | ------------------------------- |
@@ -94,7 +111,8 @@ Then open your browser at http://localhost:8501
 | `PCA_COMPONENTS`       | 2      | Dimensions for visualization    |
 | `RF_ESTIMATORS`        | 100    | Random Forest trees             |
 
-Technologies
+## Technologies
+
 Python 3.10+
 OpenCV (classical DIP operators)
 scikit-learn (PCA, Random Forest)
@@ -102,8 +120,11 @@ scikit-image (GLCM texture)
 Streamlit (web interface)
 Plotly (interactive PCA visualization)
 Pandas / NumPy
-Reproducibility
+
+## Reproducibility
+
 All random operations use SEED = 42. The full pipeline has been executed on 11,788 images and results are stored in outputs/.
 
-License
+## License
+
 Academic project for Digital Image Processing course.
