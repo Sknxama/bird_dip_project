@@ -121,13 +121,13 @@ streamlit run app.py
 
 ## 技术栈
 
-Python 3.10+
-OpenCV（经典图像处理算子）
-scikit-learn（PCA、Random Forest）
-scikit-image（GLCM 纹理特征）
-Streamlit（Web 界面）
-Plotly（交互式 PCA 可视化）
-Pandas / NumPy（数据处理）
+- **Python 3.10+**
+- **OpenCV（经典图像处理算子）**
+- **scikit-learn（PCA、Random Forest）**
+- **scikit-image（GLCM 纹理特征）**
+- **Streamlit（Web 界面）**
+- **Plotly（交互式 PCA 可视化）**
+- **Pandas / NumPy（数据处理）**
 
 ## 可复现性说明
 
