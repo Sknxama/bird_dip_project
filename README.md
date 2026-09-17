@@ -121,13 +121,13 @@ Then open your browser at http://localhost:8501
 
 ## Technologies
 
-Python 3.10+
-OpenCV (classical DIP operators)
-scikit-learn (PCA, Random Forest)
-scikit-image (GLCM texture)
-Streamlit (web interface)
-Plotly (interactive PCA visualization)
-Pandas / NumPy
+- **Python 3.10+**
+- **OpenCV (classical DIP operators)**
+- **scikit-learn (PCA, Random Forest)**
+- **scikit-image (GLCM texture)**
+- **Streamlit (web interface)**
+- **Plotly (interactive PCA visualization)**
+- **Pandas / NumPy**
 
 ## Reproducibility
 
