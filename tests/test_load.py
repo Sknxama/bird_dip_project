@@ -1,4 +1,7 @@
 """Script de prueba: carga una imagen y la muestra."""
+import sys
+import os
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import os
 from pathlib import Path

@@ -1,4 +1,7 @@
 """Temporary test to verify PCA works."""
+import sys
+import os
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from src.data_loader import load_features_with_labels
 from src.pca_analysis import run_pca
