@@ -93,7 +93,45 @@ pip install -r requirements.txt
 CUB-200-2011：从 Caltech 下载，解压到 data/images/ 和 data/annotations/
 AVONET：从 Figshare 下载，保存为 data/avonet.csv
 
-## 使用说明
+### 首次运行与复现说明
+
+由于提交文件大小限制，数据集（CUB-200-2011 图像，约 1.2 GB）与训练好的模型权重（.pkl）未包含在提交包中。评审老师可通过以下步骤完全复现本系统：
+
+### 1. 批量处理生成特征表
+
+```bash
+python pipeline.py
+```
+
+运行后将自动生成 outputs/features.csv（约 11,788 行特征数据）。
+
+### 2. PCA 降维与分类器训练
+
+```bash
+python -c "from src.data_loader import load_features_with_labels; from src.pca_analysis import run_pca; from src.classifier import train_classifier; X, y, meta = load_features_with_labels('features.csv'); run_pca(X, meta); train_classifier(X, y)"
+```
+
+运行后将生成：
+
+- outputs/pca_results.csv（PCA 投影结果）
+- outputs/models/rf_model.pkl（训练好的随机森林模型）
+
+### 3. AVONET 生态指标映射
+
+```bash
+python -c "from src.avonet_cleaner import clean_avonet; from src.eco_mapper import build_eco_lookup_table; clean_avonet(); build_eco_lookup_table()"
+```
+
+### 4. 启动图形界面
+
+```bash
+streamlit run app.py
+```
+
+浏览器将自动打开 http://localhost:8501。
+注意：所有随机操作均已固定种子 SEED = 42，确保实验结果可完全复现。
+
+## 使用说明 (日常使用)
 
 ### 批量处理（生成 features.csv）
 
@@ -107,7 +145,7 @@ python pipeline.py
 streamlit run app.py
 ```
 
-然后在浏览器打开 http://localhost:8501
+浏览器自动打开 http://localhost:8501。
 
 ## 关键技术参数
 

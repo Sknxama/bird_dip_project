@@ -93,9 +93,49 @@ pip install -r requirements.txt
 CUB-200-2011: Download from Caltech and extract to data/images/ and data/annotations/.
 AVONET: Download from Figshare and save as data/avonet.csv.
 
-## Usage
+### First-Time Setup (Reproducibility)
 
-### Batch Processing (generate features.csv)
+Since datasets and model weights are excluded from submission, run the following steps to generate all outputs:
+
+### Step 1: Batch processing (generate features.csv)
+
+```bash
+python pipeline.py
+```
+
+This generates outputs/features.csv (11,788 rows of extracted features).
+
+### Step 2: PCA and classifier training
+
+```bash
+python -c "from src.data_loader import load_features_with_labels; from src.pca_analysis import run_pca; from src.classifier import train_classifier; X, y, meta = load_features_with_labels('features.csv'); run_pca(X, meta); train_classifier(X, y)"
+```
+
+This generates:
+
+- outputs/pca_results.csv (PCA projections)
+- outputs/models/rf_model.pkl (trained Random Forest model)
+
+### Step 3: AVONET ecological mapping
+
+```bash
+python -c "from src.avonet_cleaner import clean_avonet; from src.eco_mapper import build_eco_lookup_table; clean_avonet(); build_eco_lookup_table()"
+```
+
+This generates outputs/eco_lookup.csv (ecological traits lookup table).
+
+### Step 4: Launch web interface
+
+```bash
+streamlit run app.py
+```
+
+Then open your browser at http://localhost:8501.
+Note: All random operations use fixed seed SEED = 42 to ensure full reproducibility.
+
+## Usage (Daily)
+
+### Batch Processing
 
 ```bash
 python pipeline.py
@@ -108,6 +148,28 @@ streamlit run app.py
 ```
 
 Then open your browser at http://localhost:8501
+
+## First-Time Setup (Reproducibility)
+
+Since datasets and model weights are excluded from submission, run this once to generate all outputs:
+
+```bash
+python pipeline.py
+```
+
+Then train the classifier and build ecological mapping:
+
+```bash
+python -c "from src.data_loader import load_features_with_labels; from src.pca_analysis import run_pca; from src.classifier import train_classifier; X, y, meta = load_features_with_labels('features.csv'); run_pca(X, meta); train_classifier(X, y)"
+```
+
+Finally launch the app:
+
+```bash
+streamlit run app.py
+```
+
+All outputs will be generated in outputs/ directory.
 
 ## Key Parameters
 
